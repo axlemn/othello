@@ -1,4 +1,8 @@
+// Written by Alex Mun
+
+
 #include "player.h"
+#include "time.h"
 
 /*
  * Constructor for the player; initialize everything here. The side your AI is
@@ -39,5 +43,23 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * TODO: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
      */ 
+
+    // start_time = timestamp()
+    // num_moves = number of moves left for US to take
+    // end_time = start_time + frac_use[this.moves_made] * msLeft
+    
+    /*
+    end_time = start_time + (msLeft-100) * frac_time
+    // Small amount of buffer time allotted to perform the move
+    next_move = DEFAULT  TODO: determine default
+
+    while (current_time < end_time)
+    // TODO refine next_move calculation
+        current_time = SET;
+    }
+    */
+
+    // Perform the move somehow.
+
     return NULL;
 }
