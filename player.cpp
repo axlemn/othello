@@ -4,6 +4,17 @@
 #include "player.h"
 #include "time.h"
 
+/* HJP
+ * Hong Joon Park (HJP)
+ * Comments by me will be in a block preceeded by "HJP"
+ */
+
+/* HJP
+ * TODO:
+ * 1) [DONE]Create a board object (done in player.h upon Player construction)
+ * 2) [DONE]Initialize moves_made (Amun's var to keep track of # of moves made)
+ */
+
 /*
  * Constructor for the player; initialize everything here. The side your AI is
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish 
@@ -18,6 +29,8 @@ Player::Player(Side side) {
      * precalculating things, etc.) However, remember that you will only have
      * 30 seconds.
      */
+    moves_made = 0;
+
 }
 
 /*
