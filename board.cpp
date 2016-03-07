@@ -1,5 +1,11 @@
 #include "board.h"
 
+
+/* HJP
+ * Hong Joon Park (HJP)
+ * Comments by me will be in a block preceeded by "HJP"
+ */
+
 /*
  * Make a standard 8x8 othello board and initialize it to the standard setup.
  */
@@ -177,4 +183,24 @@ void Board::setBoard(char data[]) {
             taken.set(i);
         }
     }
+}
+
+/* HJP
+ * Returns a vector of possible legal moves
+ */
+std::vector<Move> Board::possibleMoves(Side side)
+{
+    std::vector<Move> legal_moves;
+    for (int x = 0; x < 8; x++)
+    {
+        for (int y = 0; y < 8; y++)
+        {
+            Move move = Move(x, y);
+            if (checkMove(&move, side))
+            {
+                legal_moves.push_back(move);
+            }
+        }
+    }
+    return legal_moves;
 }
