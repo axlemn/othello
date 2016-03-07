@@ -4,6 +4,8 @@
 #include <iostream>
 #include "common.h"
 #include "board.h"
+#include <stdlib.h>
+#include <time.h> 
 using namespace std;
 
 class Player {
@@ -20,6 +22,8 @@ public:
 private:
 	Board board;
 	int moves_made;
+	Side player_side;
+	Side opponent_side;
 
 };
 
