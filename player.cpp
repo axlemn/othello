@@ -1,5 +1,4 @@
-// Written by Alex Mun
-
+// Written by Alex Mun and Hong Joon Park
 
 #include "player.h"
 #include "time.h"
@@ -58,6 +57,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      */ 
 
     // start_time = timestamp()
+
     // num_moves = number of moves left for US to take
     // end_time = start_time + frac_use[this.moves_made] * msLeft
     
@@ -65,8 +65,14 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     end_time = start_time + (msLeft-100) * frac_time
     // Small amount of buffer time allotted to perform the move
     next_move = DEFAULT  TODO: determine default
+    */
 
-    while (current_time < end_time)
+    std::vector<Board>;
+    board_ahead = this.board.copy();
+    /*
+    while (current_time < end_time){
+        board_ahead.valid_move(); // TODO: What's the return type here?
+        for possible move in 
     // TODO refine next_move calculation
         current_time = SET;
     }
