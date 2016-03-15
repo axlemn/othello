@@ -29,6 +29,7 @@ public:
     int count(Side side);
     int countBlack();
     int countWhite();
+    int score(Side pos);
 
     void setBoard(char data[]);
     vector<Move> possibleMoves(Side side);

@@ -47,6 +47,11 @@ void Player::setBoard(Board *board) {
     this->board = *board;
 }
 
+//Move *Player::doMove(Move *opponentsMove, int msLeft) {
+//    // Do 3 iterations of minimax.
+//    this->doMinimaxMove(opponentsMove, msLeft, 3);
+//}
+
 
 /*
  * Compute the next move given the opponent's last move. Your AI is
@@ -60,7 +65,7 @@ void Player::setBoard(Board *board) {
  * The move returned must be legal; if there are no valid moves for your side,
  * return NULL.
  */
-Move *Player::doMove(Move *opponentsMove, int msLeft) {
+Move *Player::doMinimaxMove(Move *opponentsMove, int msLeft, int iter) {
     /* 
      * DONE: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
@@ -102,7 +107,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
     // HJP: Establish a temp. var. holding the max points to gain & the move
     // that gets those points
-    int current_max = -1;
+    int opp_min = 10000;
     Move * move;
 
     // HJP: If we have no legal moves
@@ -120,22 +125,26 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
             // HJP: Clone board into test board for calculating pieces won
             Board * testboard = board.copy();
 
-            // Do our move
-            // testboard->doMove(&legal_moves[i], player_side);
             // AMUN: Partner tells us what a greedy player would do if 
             // we make move i
             test_partner.setBoard(testboard);
 
-            Move * opp_greedy;
-            opp_greedy = test_partner.doSimpleMove(&legal_moves[i]);
-            // Check if test_partner had any moves to make
-            if (opp_greedy != NULL) {
-                testboard->doMove(opp_greedy, opponent_side);
-            }
+            // REDO MINIMAX
+            Move * opp_move;
+ //         if (iter <= 1)
+ //             opp_move = test_partner.doSimpleMove(&legal_moves[i], msLeft);
+ //         else
+                opp_move = test_partner.doMinimaxMove(&legal_moves[i], 
+                    msLeft, iter-1);
 
-            if (current_max < testboard->count(player_side))
+            //// Check if test_partner had any moves to make
+            //if (opp_move != NULL ) {
+            //    testboard->doMove(opp_move, opponent_side);
+            //}
+
+            if (opp_min > testboard->score(player_side))
             {
-                current_max = testboard->count(player_side);
+                opp_min = testboard->score(player_side);
                 move = &legal_moves[i];
             }
             // HJP: Free testboard
@@ -155,7 +164,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
  * Does the non-minimax version.  Need this for the minimax version to base 
  * our recursion off of.
  */
-Move *Player::doSimpleMove(Move *opponentsMove) {
+Move *Player::doMove(Move *opponentsMove, int msLeft) {
     /* 
      * DONE: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
@@ -171,7 +180,7 @@ Move *Player::doSimpleMove(Move *opponentsMove) {
 
     // HJP: Establish a temp. var. holding the max points to gain & the move
     // that gets those points
-    int current_max = -1;
+    int current_max = -100;
     Move * move;
 
     // HJP: If we have no legal moves
@@ -188,9 +197,9 @@ Move *Player::doSimpleMove(Move *opponentsMove) {
             Board * testboard = board.copy();
 
             testboard->doMove(&legal_moves[i], player_side);
-            if (current_max < testboard->count(player_side))
+            if (current_max < testboard->score(player_side))
             {
-                current_max = testboard->count(player_side);
+                current_max = testboard->score(player_side);
                 move = &legal_moves[i];
             }
             // HJP: Free testboard

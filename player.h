@@ -15,7 +15,8 @@ public:
     ~Player();
     
     Move *doMove(Move *opponentsMove, int msLeft);
-    Move *doSimpleMove(Move *opponentsMove);
+    Move *doMinimaxMove(Move *opponentsMove, int msLeft, int iter);
+    Move *doSimpleMove(Move *opponentsMove, int msLeft);
 
     // AMUN: Overwrites current board with given board.
     void setBoard(Board *board);

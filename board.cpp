@@ -169,6 +169,45 @@ int Board::countWhite() {
 }
 
 /*
+ * Calculates the current score from perspective of Side pos.
+ */
+int Board::score(Side pos) {
+    float score = 0;
+
+    int x, y;
+    for (x=0; x<8; x++){
+        for (y=0; y<8; y++){
+            if (onBoard(x,y) && get(pos, x, y)){
+                if ((x == 0 || x == 7) && (y==0 || y==7))
+                {
+                    score += 10;
+                }
+                else if (x == 1 || x == 6 || y==1 || y==6)
+                {
+                    score -= 1;
+                }
+                else if (x == 0 || x == 7 || y==0 || y==7)
+                {
+                    score += 2;
+                }
+                 else
+                {
+                    score += 1;
+                }
+            }
+        }
+    }
+
+    return int(score);
+}
+/*
+ * TODO: Current count of black stones.
+int Board::scoreWhite() {
+    return taken.count() - black.count();
+}
+ */
+
+/*
  * Sets the board state given an 8x8 char array where 'w' indicates a white
  * piece and 'b' indicates a black piece. Mainly for testing purposes.
  */
